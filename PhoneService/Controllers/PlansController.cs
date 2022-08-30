@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneService.Data;
+using PhoneService.DTO;
 using PhoneService.Models;
 
 namespace PhoneService.Controllers
@@ -46,8 +47,19 @@ namespace PhoneService.Controllers
             {
                 return NotFound();
             }
+            var users = await _context.Users.Where(u => u.UserPlans.Where(us => us.PlanId == plan.Id).Any()).ToListAsync();
 
-            return plan;
+            var planDTO = new PlanDetailsDTO
+            {
+                Id = plan.Id,
+                Name = plan.Name,
+                Limit = plan.Limit,
+                Price = plan.Price,
+                Description = plan.Description,
+                Users = users
+            };
+
+            return Ok(planDTO);
         }
 
         // PUT: api/Plans/5
@@ -84,12 +96,21 @@ namespace PhoneService.Controllers
         // POST: api/Plans
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Plan>> PostPlan(Plan plan)
+        public async Task<ActionResult<Plan>> PostPlan(PlanDTO planDto)
         {
           if (_context.Plans == null)
           {
               return Problem("Entity set 'PhoneServiceDbContext.Plans'  is null.");
           }
+            var userPlans = new List<UserPlan>();
+            var plan = new Plan
+            {
+                Name = planDto.Name,
+                Limit = planDto.Limit,
+                Price = planDto.Price,
+                Description = planDto.Description,
+                UserPlans = userPlans
+            };
             _context.Plans.Add(plan);
             await _context.SaveChangesAsync();
 

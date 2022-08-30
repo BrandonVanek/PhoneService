@@ -120,7 +120,6 @@ namespace PhoneService.Controllers
             var devices = new List<Device>();
             var user = new User
             {
-                Id = userDto.Id,
                 Name = userDto.Name,
                 Username = userDto.Username,
                 Email = userDto.Email,

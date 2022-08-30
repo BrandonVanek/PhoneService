@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneService.Data;
+using PhoneService.DTO;
 using PhoneService.Models;
 
 namespace PhoneService.Controllers
@@ -32,23 +33,23 @@ namespace PhoneService.Controllers
             return await _context.Devices.ToListAsync();
         }
 
-        // GET: api/Devices/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Device>> GetDevice(int id)
-        {
-          if (_context.Devices == null)
-          {
-              return NotFound();
-          }
-            var device = await _context.Devices.FindAsync(id);
+        //// GET: api/Devices/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Device>> GetDevice(int id)
+        //{
+        //  if (_context.Devices == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    var device = await _context.Devices.FindAsync(id);
 
-            if (device == null)
-            {
-                return NotFound();
-            }
+        //    if (device == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return device;
-        }
+        //    return device;
+        //}
 
         // PUT: api/Devices/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -84,12 +85,23 @@ namespace PhoneService.Controllers
         // POST: api/Devices
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Device>> PostDevice(Device device)
+        public async Task<ActionResult<Device>> PostDevice(DeviceDTO deviceDto)
         {
           if (_context.Devices == null)
           {
               return Problem("Entity set 'PhoneServiceDbContext.Devices'  is null.");
           }
+          var User = await _context.Users.FirstOrDefaultAsync(f => f.Id == deviceDto.UserId);
+            if (User == null)
+            {
+                return Problem("User does not exist.");
+            }
+            var device = new Device
+            {
+                Name = deviceDto.Name,
+                PhoneNumber = deviceDto.PhoneNumber,
+                UserId = User.Id
+            };
             _context.Devices.Add(device);
             await _context.SaveChangesAsync();
 
