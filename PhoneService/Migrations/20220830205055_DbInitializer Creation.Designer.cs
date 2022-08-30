@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneService.Data;
 
@@ -10,9 +11,10 @@ using PhoneService.Data;
 namespace PhoneService.Migrations
 {
     [DbContext(typeof(PhoneServiceDbContext))]
-    partial class PhoneServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220830205055_DbInitializer Creation")]
+    partial class DbInitializerCreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -50,6 +50,8 @@ namespace PhoneService
                 app.UseSwaggerUI();
             }
 
+            CreateDbIfNotExists(app);
+
             app.UseHttpsRedirection();
 
             app.UseCors("AllowAll");
@@ -65,6 +67,23 @@ namespace PhoneService
             app.MapControllers();
 
             app.Run();
+        }
+        private static void CreateDbIfNotExists(WebApplication app)
+        {
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<PhoneServiceDbContext>();
+                    DbInitializer.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "--An error occured creating the database--");
+                }
+            }
         }
     }
 }

@@ -12,6 +12,8 @@ namespace PhoneService.Data
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Device> Devices { get; set; }
         public DbSet<UserPlan> UserPlans { get; set; }
+
+        //public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserPlan>()
