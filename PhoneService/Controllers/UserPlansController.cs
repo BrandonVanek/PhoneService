@@ -33,23 +33,23 @@ namespace PhoneService.Controllers
             return await _context.UserPlans.ToListAsync();
         }
 
-        //// GET: api/UserPlans/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<UserPlan>> GetUserPlan(int id)
-        //{
-        //  if (_context.UserPlans == null)
-        //  {
-        //      return NotFound();
-        //  }
-        //    var userPlan = await _context.UserPlans.FindAsync(id);
+        // GET: api/UserPlans/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserPlan>> GetUserPlan(int id)
+        {
+            if (_context.UserPlans == null)
+            {
+                return NotFound();
+            }
+            var userPlan = await _context.UserPlans.FindAsync(id);
 
-        //    if (userPlan == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (userPlan == null)
+            {
+                return NotFound();
+            }
 
-        //    return userPlan;
-        //}
+            return userPlan;
+        }
 
         //// PUT: api/UserPlans/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

@@ -33,23 +33,23 @@ namespace PhoneService.Controllers
             return await _context.Devices.ToListAsync();
         }
 
-        //// GET: api/Devices/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Device>> GetDevice(int id)
-        //{
-        //  if (_context.Devices == null)
-        //  {
-        //      return NotFound();
-        //  }
-        //    var device = await _context.Devices.FindAsync(id);
+        // GET: api/Devices/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Device>> GetDevice(int id)
+        {
+            if (_context.Devices == null)
+            {
+                return NotFound();
+            }
+            var device = await _context.Devices.FindAsync(id);
 
-        //    if (device == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (device == null)
+            {
+                return NotFound();
+            }
 
-        //    return device;
-        //}
+            return device;
+        }
 
         // PUT: api/Devices/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
