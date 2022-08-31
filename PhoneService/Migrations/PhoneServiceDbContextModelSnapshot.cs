@@ -69,7 +69,7 @@ namespace PhoneService.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PhoneNumbers");
+                    b.ToTable("PhoneNumber");
                 });
 
             modelBuilder.Entity("PhoneService.Models.Plan", b =>
