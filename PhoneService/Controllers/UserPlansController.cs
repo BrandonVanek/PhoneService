@@ -51,6 +51,25 @@ namespace PhoneService.Controllers
             return userPlan;
         }
 
+        // GET: api/UserPlans/Users/5
+        [HttpGet("Users/{id}")]
+        public async Task<ActionResult<List<UserPlan>>> GetUserPlanFromUser(int id)
+        {
+            if (_context.UserPlans == null)
+            {
+                return NotFound();
+            }
+            // List of userPlan asscoiated with id
+            var userPlan = await _context.UserPlans.Where(b => b.UserId == id).ToListAsync();
+
+            if (userPlan == null)
+            {
+                return NotFound();
+            }
+            // Returning list    
+            return userPlan;
+        }
+
         //// PUT: api/UserPlans/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]
