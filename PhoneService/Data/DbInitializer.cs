@@ -24,9 +24,10 @@ namespace PhoneService.Data
             {
                 var planToAdd = new Plan[]
                 {
-                    new Plan { Name = "Silver Premium", Limit = 24, Price = 100.9, Description = "This is the plan's Description"},
-                    new Plan { Name = "Gold Premium", Limit = 24, Price = 100.9, Description = "This is the plan's Description222"},
-                    
+                    new Plan { Name = "Gold", Limit = 5, Price = 123.9, Description = "Gold plan description"},
+                    new Plan { Name = "Silver", Limit = 10, Price = 100.9, Description = "Silver plan description"},
+                    new Plan { Name = "Bronze", Limit = 15, Price = 80.9, Description = "Bronze plan description"},
+
                 };
                 context.Plans.AddRange(planToAdd);
                 context.SaveChanges();
