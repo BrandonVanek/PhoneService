@@ -32,17 +32,20 @@ namespace PhoneService.Data
                 context.Plans.AddRange(planToAdd);
                 context.SaveChanges();
             }
-            //if (!context.PhoneNumbers.Any())
-            //{
-            //    var bookingsToAdd = new PhoneNumber[]
-            //    {
-            //        new PhoneNumber { Number = "333-333-3333", UserId  = 1},
-                    
-
-            //    };
-            //    context.PhoneNumbers.AddRange(bookingsToAdd);
-            //    context.SaveChanges();
-            //}
+            if (!context.Devices.Any())
+            {
+                var devicesToAdd = new Device[]
+                {
+                    new Device { Name = "Gold", PhoneNumber = "123-456-7890", UserId = 1},
+                    new Device { Name = "Silver", PhoneNumber = "222-333-4444", UserId = 1},
+                    new Device { Name = "Gold", PhoneNumber = "123-123-1234", UserId = 1},
+                    new Device { Name = "Gold", PhoneNumber = "111-111-1111", UserId = 2},
+                    new Device { Name = "Silver", PhoneNumber = "222-222-2222", UserId = 2},
+                    new Device { Name = "Gold", PhoneNumber = "333-333-3333", UserId = 2},
+                };
+                context.Devices.AddRange(devicesToAdd);
+                context.SaveChanges();
+            }
         }
     
 }

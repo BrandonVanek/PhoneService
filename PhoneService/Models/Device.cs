@@ -8,6 +8,6 @@ namespace PhoneService.Models
         public string PhoneNumber { get; set; }
         public int UserId { get; set; }
         [JsonIgnore]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }
