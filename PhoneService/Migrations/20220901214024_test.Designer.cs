@@ -11,8 +11,8 @@ using PhoneService.Data;
 namespace PhoneService.Migrations
 {
     [DbContext(typeof(PhoneServiceDbContext))]
-    [Migration("20220830182257_test2")]
-    partial class test2
+    [Migration("20220901214024_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

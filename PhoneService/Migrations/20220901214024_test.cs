@@ -4,7 +4,7 @@
 
 namespace PhoneService.Migrations
 {
-    public partial class test1 : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

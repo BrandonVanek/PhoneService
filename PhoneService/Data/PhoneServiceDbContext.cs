@@ -7,7 +7,8 @@ namespace PhoneService.Data
 {
     public class PhoneServiceDbContext : DbContext
     {
-        public PhoneServiceDbContext(DbContextOptions<PhoneServiceDbContext> options) : base(options) { }
+        public PhoneServiceDbContext(DbContextOptions<PhoneServiceDbContext> options) : base(options) {
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Device> Devices { get; set; }
@@ -30,6 +31,8 @@ namespace PhoneService.Data
             modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
 
             modelBuilder.Entity<PhoneNumber>().HasIndex(u => u.Number).IsUnique();
+
+            modelBuilder.Entity<Device>().HasIndex(u => u.PhoneNumber).IsUnique();
         }
     }
 }
