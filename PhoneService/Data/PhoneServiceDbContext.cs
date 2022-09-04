@@ -34,5 +34,11 @@ namespace PhoneService.Data
 
             modelBuilder.Entity<Device>().HasIndex(u => u.PhoneNumber).IsUnique();
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+            optionsBuilder.EnableDetailedErrors();
+        }
     }
 }
